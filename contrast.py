@@ -7,15 +7,13 @@ class ScreenAnalysis:
         self.analyze()
 
     def analyze(self):
-        screenshot_staging = Image.open("screenshots_test/screenshot3.png")
-        screenshot_production = Image.open("screenshots_work/screenshot2.png")
-        columns = 60
-        rows = 80
+        screenshot_staging = Image.open("screenshots_work/screenshot5.png")
+        screenshot_production = Image.open("screenshots_work/screenshot6.png")
+        columns = 30
+        rows = 40
         screen_width, screen_height = screenshot_staging.size
-
         block_width = ((screen_width - 1) // columns) + 1
         block_height = ((screen_height - 1) // rows) + 1
-
         for y in range(0, screen_height, block_height + 1):
             for x in range(0, screen_width, block_width + 1):
                 region_staging = self.process_region(screenshot_staging, x, y, block_width, block_height)
