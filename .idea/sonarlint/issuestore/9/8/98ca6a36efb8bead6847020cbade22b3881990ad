@@ -1,0 +1,5 @@
+
+xpython:S3776	"TRefactor this function to reduce its Cognitive Complexity from 26 to the 15 allowed.(“ƒäíûÿÿÿÿ8‚À£÷“1
+zpython:S1176"\Rename this local variable "coordinateX" to match the regular expression ^[_a-z][a-z0-9_]*$.(äŸŸ‡8‚À£÷“1
+zpython:S1175"\Rename this local variable "coordinateY" to match the regular expression ^[_a-z][a-z0-9_]*$.(¥Á×›8‚À£÷“1
+[python:S5754:"<Specify an exception class to catch or reraise the exception(ˆÊÉ·8‚À£÷“1
