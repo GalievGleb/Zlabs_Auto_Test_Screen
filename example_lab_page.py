@@ -1,31 +1,34 @@
-import os
-import time
-import re
-from playwright.sync_api import Playwright, sync_playwright, expect
+from playwright.sync_api import Playwright, sync_playwright
+from base.base_class import BasePage
+
+URL = "http://localhost:5173/#/visuallyImpaired"
 
 
 def run(playwright: Playwright) -> None:
     browser = playwright.chromium.launch(headless=False)
-    context = browser.new_context(
-        viewport={"width": 1280, "height": 720}
-    )
+    context = browser.new_context(viewport={"width": 1280, "height": 720})
     page = context.new_page()
-    # ---------------------8
-    # ---------------------end
+    page.goto(URL)
+
+    base_page = BasePage(page)
+
+    elements = [
+        # Начиная с 9 строчки копируем
+        page.locator("label").nth(1),
+        page.get_by_title("Большой"),
+        page.get_by_role("button", name="A A"),
+        page.get_by_role("button", name="large"),
+        page.get_by_title("Черный на белом"),
+        page.get_by_title("Желтый на черном"),
+        # Заканчиваем до строчки context.close
+    ]
+
+    for idx, element in enumerate(elements, start=1):
+        base_page.click_with_screenshot(element, name=f"{idx}")
+
     context.close()
     browser.close()
 
 
-def save_screenshot(page, name):
-    project_root = os.getcwd()  # Получаем текущую рабочую директорию (корень проекта)
-    screenshots_dir = os.path.join(project_root, "screenshots_test")
-    os.makedirs(screenshots_dir, exist_ok=True)
-    screenshot_path = os.path.join(screenshots_dir, f"{name}.png")
-    page.screenshot(path=screenshot_path)
-
-
 with sync_playwright() as playwright:
     run(playwright)
-    # time.sleep(0.5)
-    # save_screenshot(page, "screenshot66")
-    # page.locator("html").press("Alt+s+1")
