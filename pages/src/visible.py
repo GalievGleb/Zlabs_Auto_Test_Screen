@@ -1,12 +1,14 @@
 from playwright.sync_api import Playwright, sync_playwright
 from base.base_class import BasePage
 
+URL = "http://localhost:5173/#/visuallyImpaired"
+
 
 def run(playwright: Playwright) -> None:
     browser = playwright.chromium.launch(headless=False)
     context = browser.new_context(viewport={"width": 1280, "height": 720})
     page = context.new_page()
-    page.goto("http://localhost:5173/#/visuallyImpaired")
+    page.goto(URL)
 
     base_page = BasePage(page)
 
