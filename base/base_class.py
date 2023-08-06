@@ -14,5 +14,5 @@ class BasePage:
 
     def click_with_screenshot(self, element, name):
         element.click()
-        self.page.wait_for_timeout(500)
+        self.page.wait_for_load_state("networkidle")  # Wait for the page to become idle
         self.take_screenshot(name)
