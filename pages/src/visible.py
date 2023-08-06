@@ -1,7 +1,8 @@
 from playwright.sync_api import Playwright, sync_playwright
 from base.base_class import BasePage
+import re
 
-URL = "http://localhost:5173/#/visuallyImpaired"
+URL = "http://localhost:5173/#/sensors?pageIndex=undefined"
 
 
 def run(playwright: Playwright) -> None:
@@ -11,15 +12,11 @@ def run(playwright: Playwright) -> None:
     page.goto(URL)
 
     base_page = BasePage(page)
+    page.locator("body").press("Alt+s+1"),
 
     elements = [
         # Начиная с 9 строчки копируем
-        page.locator("label").nth(1),
-        page.get_by_title("Большой"),
-        page.get_by_role("button", name="A A"),
-        page.get_by_role("button", name="large"),
-        page.get_by_title("Черный на белом"),
-        page.get_by_title("Желтый на черном"),
+
         # Заканчиваем до строчки context.close
     ]
 
